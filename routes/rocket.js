@@ -1,9 +1,6 @@
 var express = require('express');
+const rocket_controlers= require('../controllers/rocket');
 var router = express.Router();
-
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('rocket', { title: 'Search Results rocket' });
-});
-
+/* GET costumes */
+router.get('/', rocket_controlers.rocket_view_all_Page );
 module.exports = router;
