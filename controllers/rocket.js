@@ -5,7 +5,14 @@ exports.rocket_list = function (req, res) {
 };
 // for a specific rocket.
 exports.rocket_detail = function (req, res) {
-    res.send('NOT IMPLEMENTED: rocket detail: ' + req.params.id);
+    console.log("detail"  + req.params.id) 
+    try { 
+        result = await rocket.findById( req.params.id) 
+        res.send(result) 
+    } catch (error) { 
+        res.status(500) 
+        res.send(`{"error": document for id ${req.params.id} not found`); 
+    } 
 };
 // Handle rocket create on POST.
 exports.rocket_create_post = async function (req, res) {

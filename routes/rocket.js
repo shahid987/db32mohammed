@@ -2,5 +2,5 @@ var express = require('express');
 const rocket_controlers= require('../controllers/rocket');
 var router = express.Router();
 /* GET costumes */
-router.get('/', rocket_controlers.rocket_view_all_Page );
+router.get('/rocket/:id', Rocket_controller.rocket_detail); 
 module.exports = router;
