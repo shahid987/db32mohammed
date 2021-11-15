@@ -1,6 +1,8 @@
 var express = require('express');
-const rocket_controlers= require('../controllers/rocket');
+const rocket_controllers= require('../controllers/rocket');
+const rocket = require('../models/rocket');
 var router = express.Router();
-/* GET costumes */
-router.get('/rocket/:id', Rocket_controller.rocket_detail); 
-module.exports = router;
+
+
+router.get('/',rocket_controllers.rocket_view_all_Page);
+module.exports=router;
