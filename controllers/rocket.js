@@ -38,9 +38,25 @@ exports.rocket_delete = function (req, res) {
     res.send('NOT IMPLEMENTED: rocket delete DELETE ' + req.params.id);
 };
 // Handle rocket update form on PUT.
-exports.rocket_update_put = function (req, res) {
-    res.send('NOT IMPLEMENTED: rocket update PUT' + req.params.id);
-};
+exports.rocket_update_put = async function(req, res) { 
+    console.log(`update on id ${req.params.id} with body 
+${JSON.stringify(req.body)}`) 
+    try { 
+        let toUpdate = await rocket.findById( req.params.id) 
+        // Do updates of properties 
+        if(req.body.rocket_type)  
+               toUpdate.rocket_type = req.body.rocket_type; 
+        if(req.body.cost) toUpdate.cost = req.body.cost; 
+        if(req.body.size) toUpdate.size = req.body.size; 
+        let result = await toUpdate.save(); 
+        console.log("Sucess " + result) 
+        res.send(result) 
+    } catch (err) { 
+        res.status(500) 
+        res.send(`{"error": ${err}: Update for id ${req.params.id} 
+failed`); 
+    } 
+}; 
 
 // List of all rockets
 exports.rocket_list = async function (req, res) {
