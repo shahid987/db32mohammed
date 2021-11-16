@@ -1,0 +1,35 @@
+extends layout 
+ 
+block content 
+  h1= title 
+ 
+  form(id='rocketForm', action="/resource/rocket", method="POST") 
+    div.form-group 
+        label.rocketAttr(for='rocket_type') rocket type 
+        input#rocket_type(type='text', name='rocket_type') 
+    div.form-group 
+        label.rocketAttr(for='size') rocket size 
+        input#size(type='text', name='size') 
+    div.form-group 
+        label.rocketAttr(for='cost') rocket cost 
+        input#cost(type='number', name='cost') 
+    input(type="submit") 
+    button(class="btn btn-secondary m-2" onclick="window.location.href='/rocket'") Cancel
+ 
+  script. 
+    document.forms['rocketForm'].addEventListener('submit', (event) => { 
+      event.preventDefault(); 
+      // TODO do something here to show user that form is being submitted 
+      fetch(event.target.action, { 
+        method: 'POST', 
+        body: new URLSearchParams(new FormData(event.target)) // event.target is the form 
+      }).then((resp) => { 
+        return resp.json(); // or resp.text() or whatever the server sends 
+      }).then((body) => { 
+        alert("Save succeded") 
+        // TODO handle body 
+      }).catch((error) => { 
+        // TODO handle error 
+        alert("Save failed " + error ) 
+      }); 
+    }); 

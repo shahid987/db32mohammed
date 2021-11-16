@@ -1,0 +1,25 @@
+extends layout 
+ 
+block content 
+  
+  h1= title 
+ 
+  - let rocketid = toShow._id 
+  - let rocket_type = toShow.rocket_type 
+  - let qunatity  = toShow.quantity 
+  - let cost  = toShow.size 
+
+  div 
+    div.row 
+      div(class='rocketAttr mr-3') rocket ID is: 
+      div #{rocketid} 
+    div.row 
+      div(class='rocketAttr mr-3') rocket Type is: 
+      div #{rocket_type} 
+    div.row 
+      div(class='rocketAttr mr-3') quantity  is: 
+      div #{quantity} 
+    div.row 
+      div(class='rocketAttr mr-3')  Cost is: 
+      div #{cost} 
+      button(class="btn btn-secondary m-2" onclick="window.location.href='/rocket'") Cancel
