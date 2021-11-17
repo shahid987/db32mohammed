@@ -1,57 +1,55 @@
 extends layout 
- 
+
 block content 
-  h1= title 
- 
-  if (toShow == null) 
-    h2 No instance to delete 
-  else 
-    - let rocketid = toShow._id 
-    - let rocket_type = toShow.rocket_type 
-    - let rocketquantity = toShow.quantity 
-    - let rocketcost  = toShow.cost
-    - let actionid = "/resource/rockets/" + rocketid
+    h1= title 
+
+    if (toShow == null) 
+        h2 No instance to delete 
+    else 
+        - let rocketid = toShow._id 
+        - let rocket_type = toShow.rocket_type 
+        - let rocketquantity = toShow.quantity 
+        - let rocketcost  = toShow.cost
+        - let _actionid = "/resource/rocket/" + rocketid
+        script var actionid = "#{_actionid}" 
+        div   
+         div.row 
+            div(class='rocketAttr mr-3') rocket ID is: 
+            div #{rocketid} 
+         div.row 
+            div(class='rocketAttr mr-3') rocket Type is: 
+            div #{rocket_type} 
+         div.row 
+            div(class='rocketAttr mr-3') rocket quantity is: 
+            div #{rocketquantity} 
+         div.row 
+            div(class='rocketAttr mr-3') rocket Cost is: 
+            div #{rocketcost} 
+
+        button(class="btn btn-danger m-2" onclick="deleteOnid()") Delete 
+        button(class="btn btn-secondary m-2" onclick="window.location.href='/rocket'") Cancel
 
 
-    script let actionid = "#{actionid}" 
-    div 
-      div.row 
-        div(class='rocketAttr mr-3') rocket ID is: 
-        div #{rocketid} 
-      div.row 
-        div(class='rocketAttr mr-3') rocket Type is: 
-        div #{rocket_type} 
-      div.row 
-        div(class='rocketAttr mr-3') rocket quantity is: 
-        div #{rocketquantity} 
-      div.row 
-        div(class='rocketAttr mr-3') rocket Cost is: 
-        div #{rocketcost} 
- 
-    button(class="btn btn-danger m-2" onclick="deleteOnid()") Delete 
-    button(class="btn btn-secondary m-2" onclick="cancel()") Cancel 
 
-button(class="btn btn-secondary m-2" onclick="window.location.href='/rocket'") Cancel
- 
-  script. 
-    function cancel() { 
-      // Go back to the home page for the rocket collection 
-      window.location.href='/rockets' 
-    } 
-  script. 
-    function deleteOnid() { 
-      console.log("starting delete") 
-      // delete first 
-      fetch(actionid, { 
-          method: 'DELETE'     
-      }).then((resp) => { 
-        return resp.json(); // or resp.text() or whatever the server sends 
-      }).then((body) => { 
-        alert("Delete succeded") 
-        window.location.href='/rockets' 
-        // TODO handle body 
-      }).catch((error) => { 
-        // TODO handle error 
-        alert("Delete failed " + error ) 
-      }); 
-    }
+    script. 
+        function cancel() { 
+            // Go back to the home page for the rocket collection 
+            window.location.href='/rockets' 
+        } 
+    script. 
+        function deleteOnid() { 
+            console.log("starting delete") 
+            // delete first 
+            fetch(actionid, { 
+                method: 'DELETE'     
+            }).then((resp) => { 
+                return resp.json(); // or resp.text() or whatever the server sends 
+            }).then((body) => { 
+                alert("Delete succeded") 
+                window.location.href='/rockets' 
+                // TODO handle body 
+            }).catch((error) => { 
+                // TODO handle error 
+                alert("Delete failed " + error ) 
+            }); 
+        }
